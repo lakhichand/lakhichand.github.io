@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens (Tailwind v4 @theme)                                 */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-bg: #07070b;
+  --color-surface: #0d0d15;
+  --color-surface-2: #14141f;
+  --color-fg: #ecebf5;
+  --color-muted: #a2a1b5;
+  --color-faint: #6f6e85;
+  --color-border: #ffffff14;
+
+  --color-accent: #8b5cf6; /* violet */
+  --color-accent-2: #22d3ee; /* cyan   */
+  --color-accent-3: #f472b6; /* pink   */
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --radius-xl2: 1.5rem;
+  --shadow-glow: 0 0 60px -15px rgba(139, 92, 246, 0.45);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Ambient aurora backdrop, fixed behind everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(60rem 60rem at 15% -10%, rgba(139, 92, 246, 0.16), transparent 60%),
+    radial-gradient(50rem 50rem at 100% 10%, rgba(34, 211, 238, 0.12), transparent 55%),
+    radial-gradient(40rem 40rem at 50% 120%, rgba(244, 114, 182, 0.1), transparent 60%);
+  pointer-events: none;
+}
+
+/* Subtle grid, masked toward the top */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  pointer-events: none;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.35);
+  color: #fff;
+}
+
+/* Visible, consistent keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--color-accent-2) 80%, transparent);
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a3a;
+  border-radius: 999px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a50;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reusable utilities                                                 */
+/* ------------------------------------------------------------------ */
+@utility gradient-text {
+  background: linear-gradient(
+    100deg,
+    var(--color-accent) 0%,
+    var(--color-accent-3) 45%,
+    var(--color-accent-2) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility glass {
+  background: color-mix(in oklab, var(--color-surface) 70%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+@utility card-surface {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--color-surface-2) 92%, transparent),
+    color-mix(in oklab, var(--color-surface) 92%, transparent)
+  );
+  border: 1px solid var(--color-border);
+}
+
+/* Card that lifts and warms its edge on hover */
+@utility card-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.21, 0.47, 0.32, 0.98),
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+@utility card-lift-on {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--color-accent) 45%, transparent);
+  box-shadow: 0 18px 40px -24px rgba(139, 92, 246, 0.75);
+}
+
+/* Hairline gradient rule used to separate sections */
+@utility rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-accent) 35%, transparent),
+    transparent
+  );
+}
+
+/* Eyebrow label above section titles */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-accent-2);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Keyframes                                                          */
+/* ------------------------------------------------------------------ */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 22s linear infinite; }
+.animate-marquee { animation: marquee 38s linear infinite; }
+
+/* Fine film grain over the whole page — kills gradient banding */
+html::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Marquee edge fade */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Accessibility: reduced motion                                      */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Section rhythm helper */
+.section {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* Form inputs */
+.input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.9rem;
+  color: var(--color-fg);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input::placeholder {
+  color: var(--color-faint);
+}
+.input:focus {
+  border-color: color-mix(in oklab, var(--color-accent) 60%, transparent);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
