@@ -78,6 +78,18 @@ body::after {
   color: #fff;
 }
 
+/* Tailwind's reset leaves buttons on the default arrow cursor — anything
+   clickable should say so. */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+label[for],
+summary {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
 /* Visible, consistent keyboard focus everywhere */
 :focus-visible {
   outline: 2px solid color-mix(in oklab, var(--color-accent-2) 80%, transparent);

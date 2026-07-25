@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { ArrowRight, Download, Mail, MapPin } from "lucide-react";
+import { ArrowRight, Download, ExternalLink, Mail, MapPin } from "lucide-react";
 import {
   GithubIcon,
   LinkedinIcon,
@@ -13,6 +13,9 @@ import { site, socials, heroRoles, heroStats } from "@/lib/content";
 
 // R3F must be client-only; load it lazily so it never blocks first paint.
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), { ssr: false });
+
+/** A resume hosted elsewhere can't be force-downloaded from our origin. */
+const resumeIsExternal = /^https?:\/\//.test(site.resumePath);
 
 /** Cycles through heroRoles, one word swapped in at a time. */
 function RotatingRole() {
@@ -25,8 +28,9 @@ function RotatingRole() {
     return () => clearInterval(id);
   }, [reduce]);
 
+  // Width must clear the longest entry in heroRoles ("Backend Engineer", 16).
   return (
-    <span className="relative block h-7 w-[15ch] overflow-hidden">
+    <span className="relative block h-7 w-[17ch] overflow-hidden">
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={heroRoles[i]}
@@ -95,8 +99,10 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.05 }}
             className="mt-6 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-balance sm:text-6xl md:text-7xl"
           >
+            {/* Solid, not gradient — the gradient is reserved for the CTA and
+                brand marks so it reads as an accent, not a default. */}
             <span className="block text-fg">{site.name}</span>
-            <span className="gradient-text mt-1 block">{site.role}</span>
+            <span className="mt-1 block text-muted">{site.role}</span>
           </motion.h1>
 
           <motion.p
@@ -152,10 +158,18 @@ export function Hero() {
             </a>
             <a
               href={site.resumePath}
-              download
+              // `download` is ignored on cross-origin URLs, so a hosted resume
+              // (Drive, Dropbox…) opens in a new tab instead.
+              {...(resumeIsExternal
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : { download: true })}
               className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-muted transition-colors hover:text-fg"
             >
-              <Download className="h-4 w-4" />
+              {resumeIsExternal ? (
+                <ExternalLink className="h-4 w-4" />
+              ) : (
+                <Download className="h-4 w-4" />
+              )}
               Resume
             </a>
           </motion.div>

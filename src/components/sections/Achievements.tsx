@@ -7,9 +7,12 @@ import {
   useReducedMotion,
   animate as animateValue,
 } from "framer-motion";
+import { Trophy, Zap, Brain } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal, RevealGroup } from "@/components/ui/Reveal";
 import { achievements, badges, type Achievement } from "@/lib/content";
+
+const BADGE_ICONS = { trophy: Trophy, zap: Zap, brain: Brain };
 
 function Counter({ item }: { item: Achievement }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -33,7 +36,8 @@ function Counter({ item }: { item: Achievement }) {
     <span ref={ref} className="tabular-nums">
       {item.prefix}
       {display}
-      {item.suffix}
+      {/* The one spot of colour on the number — accent as punctuation */}
+      <span className="text-accent">{item.suffix}</span>
     </span>
   );
 }
@@ -58,7 +62,7 @@ export function Achievements() {
             className="card-surface card-lift group relative flex flex-col items-center justify-center overflow-hidden rounded-2xl px-6 py-10 text-center hover:card-lift-on"
           >
             <div className="absolute inset-x-0 -top-16 mx-auto h-32 w-32 rounded-full bg-accent/25 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="gradient-text font-display text-5xl font-extrabold sm:text-6xl">
+            <div className="font-display text-5xl font-extrabold text-fg sm:text-6xl">
               <Counter item={item} />
             </div>
             {/* Fixed label box keeps all three counters on the same baseline */}
@@ -70,13 +74,17 @@ export function Achievements() {
       </RevealGroup>
 
       <div className="mt-6 flex flex-wrap justify-center gap-3">
-        {badges.map((badge, i) => (
-          <Reveal key={badge} delay={i * 0.06}>
-            <span className="glass inline-block rounded-full px-4 py-2 text-sm text-muted transition-colors hover:border-accent/40 hover:text-fg">
-              {badge}
-            </span>
-          </Reveal>
-        ))}
+        {badges.map((badge, i) => {
+          const Icon = BADGE_ICONS[badge.icon];
+          return (
+            <Reveal key={badge.label} delay={i * 0.06}>
+              <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm text-muted transition-colors hover:border-accent/40 hover:text-fg">
+                <Icon className="h-4 w-4 flex-none text-accent" />
+                {badge.label}
+              </span>
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );

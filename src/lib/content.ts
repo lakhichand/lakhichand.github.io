@@ -16,8 +16,10 @@ export const site = {
   phone: "+91 9075538847",
   // Used for SEO canonical URL, sitemap, and Open Graph. Update once you have a domain.
   url: "https://lakhichand.github.io",
-  // Path to your resume PDF placed in /public. Export it from Overleaf and drop it here.
-  resumePath: "/resume.pdf",
+  // Resume. Either a file in /public ("/resume.pdf") or a full URL — the button
+  // detects which and opens external links in a new tab instead of downloading.
+  resumePath:
+    "https://drive.google.com/file/d/1a5xXhr7mIUmWj5nFjLCDk2-K9oBa0CBY/view",
   availability: "Open to backend / full-stack roles",
   // Typical turnaround shown on the contact card.
   responseTime: "Usually replies within a day",
@@ -42,9 +44,9 @@ export const heroStats: { value: string; label: string }[] = [
 ];
 
 export const socials = {
-  github: "https://github.com/lakhichandborse",
-  linkedin: "https://linkedin.com/in/lakhichandborse",
-  leetcode: "https://leetcode.com/lakhichandborse",
+  github: "https://github.com/lakhichand",
+  linkedin: "https://www.linkedin.com/in/lakhichand-borse-679316226/",
+  leetcode: "https://leetcode.com/u/Lakhichand1377/",
   // twitter: "https://x.com/yourhandle", // add if you have one
 } as const;
 
@@ -217,7 +219,7 @@ export const projects: Project[] = [
     description:
       "A full-scale ERP solution automating property listings, leads, sales pipeline, bookings, contracts, and analytics — with backend logic, optimized ORM queries, and dynamic UI components.",
     tech: ["Python", "PostgreSQL", "Odoo ORM", "XML", "OWL"],
-    // repoUrl: "https://github.com/lakhichandborse/...", // add if public
+    // repoUrl: "https://github.com/lakhichand/...", // add if public
     featured: true,
   },
   {
@@ -226,7 +228,7 @@ export const projects: Project[] = [
       "A job board connecting seekers and recruiters — browse and apply to roles, post and manage listings, with authentication and role-based dashboards.",
     tech: ["Python", "Django", "PostgreSQL", "Bootstrap"],
     // liveUrl: "https://...",
-    // repoUrl: "https://github.com/lakhichandborse/...",
+    // repoUrl: "https://github.com/lakhichand/...",
   },
   {
     name: "NGO Website",
@@ -234,7 +236,7 @@ export const projects: Project[] = [
       "A responsive website for a non-profit — donations, volunteer sign-ups, events, and an admin panel to manage content, all optimized for mobile.",
     tech: ["React", "Next.js", "Tailwind CSS"],
     // liveUrl: "https://...",
-    // repoUrl: "https://github.com/lakhichandborse/...",
+    // repoUrl: "https://github.com/lakhichand/...",
   },
   {
     name: "Sorting Algorithm Visualizer",
@@ -242,7 +244,7 @@ export const projects: Project[] = [
       "A real-time web app that visualizes sorting algorithms with adjustable speed controls — demonstrating data structures, algorithms, and clean object-oriented design.",
     tech: ["JavaScript", "HTML", "CSS"],
     // liveUrl: "https://...",
-    // repoUrl: "https://github.com/lakhichandborse/...",
+    // repoUrl: "https://github.com/lakhichand/...",
   },
   {
     name: "Wordle Clone",
@@ -250,7 +252,7 @@ export const projects: Project[] = [
       "A browser word-guessing game — daily puzzles, on-screen keyboard input, and win/streak tracking. A fun, polished take on the classic. 🎯",
     tech: ["JavaScript", "React", "CSS"],
     // liveUrl: "https://...",
-    // repoUrl: "https://github.com/lakhichandborse/...",
+    // repoUrl: "https://github.com/lakhichand/...",
   },
 ];
 
@@ -272,11 +274,15 @@ export const achievements: Achievement[] = [
   },
 ];
 
-/** Highlighted badges shown alongside the counters. */
-export const badges: string[] = [
-  "🏆 Best Performer at Odoo",
-  "⚡ Production reliability specialist",
-  "🧠 500+ problems on LeetCode / GfG / HackerRank",
+/**
+ * Highlighted badges shown alongside the counters.
+ * `icon` maps to a lucide icon in Achievements.tsx — emoji don't scale, don't
+ * inherit colour, and render differently on every OS.
+ */
+export const badges: { icon: "trophy" | "zap" | "brain"; label: string }[] = [
+  { icon: "trophy", label: "Best Performer at Odoo" },
+  { icon: "zap", label: "Production reliability specialist" },
+  { icon: "brain", label: "500+ problems on LeetCode / GfG / HackerRank" },
 ];
 
 /** One-tap opener suggestions shown as chips above the contact message box. */
@@ -341,7 +347,7 @@ export const assistant = {
     },
     {
       q: "✉️ How to contact him",
-      a: `Email ${site.email}, call ${site.phone}, or find him on LinkedIn & GitHub as @lakhichandborse. There's a contact form right here on the site too.`,
+      a: `Email ${site.email}, call ${site.phone}, or find him on GitHub as @lakhichand and on LinkedIn as Lakhichand Borse. There's a contact form right here on the site too.`,
     },
   ] as ChatSuggestion[],
   // Label for the chip that re-opens the full question list at any time.

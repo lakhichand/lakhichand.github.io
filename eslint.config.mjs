@@ -11,6 +11,8 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    // Static export published to GitHub Pages — minified output, not source.
+    "docs/**",
     "next-env.d.ts",
   ]),
 ]);
