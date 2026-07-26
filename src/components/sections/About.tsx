@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { User } from "lucide-react";
+import Image from "next/image";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { about, skills, site, quickFacts } from "@/lib/content";
@@ -29,20 +29,27 @@ export function About() {
             <div className="group relative mx-auto w-full max-w-xs lg:mx-0">
               <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-accent/30 via-accent-3/20 to-accent-2/30 opacity-60 blur-2xl transition-opacity group-hover:opacity-90" />
               <div className="card-surface relative aspect-[4/5] overflow-hidden rounded-3xl">
-                {/* Replace this block with a real <Image /> once you add a photo to /public */}
-                <div className="grid h-full w-full place-items-center bg-gradient-to-br from-surface-2 to-surface">
-                  <span
-                    aria-hidden="true"
-                    className="gradient-text font-display text-7xl font-extrabold opacity-90"
-                  >
-                    {initials}
-                  </span>
-                </div>
+                {site.photo ? (
+                  <Image
+                    src={site.photo}
+                    alt={`${site.name} — portrait`}
+                    fill
+                    sizes="(max-width: 1024px) 20rem, 24rem"
+                    priority
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                ) : (
+                  // Falls back to the monogram so a missing file never breaks the layout
+                  <div className="grid h-full w-full place-items-center bg-gradient-to-br from-surface-2 to-surface">
+                    <span
+                      aria-hidden="true"
+                      className="gradient-text font-display text-7xl font-extrabold opacity-90"
+                    >
+                      {initials}
+                    </span>
+                  </div>
+                )}
                 <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
-                <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 bg-gradient-to-t from-bg/90 to-transparent px-4 pb-3 pt-8 text-xs text-faint">
-                  <User className="h-3.5 w-3.5" />
-                  <span className="font-mono">add your-photo.jpg</span>
-                </div>
               </div>
             </div>
           </Reveal>
