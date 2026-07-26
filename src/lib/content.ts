@@ -20,6 +20,9 @@ export const site = {
   // detects which and opens external links in a new tab instead of downloading.
   resumePath:
     "https://drive.google.com/file/d/1a5xXhr7mIUmWj5nFjLCDk2-K9oBa0CBY/view",
+  // Portrait shown in the About section. Drop the file in /public.
+  // Leave as an empty string to fall back to the initials monogram.
+  photo: "/profile.jpg",
   availability: "Open to backend / full-stack roles",
   // Typical turnaround shown on the contact card.
   responseTime: "Usually replies within a day",
