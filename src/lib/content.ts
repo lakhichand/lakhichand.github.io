@@ -84,13 +84,6 @@ export type Capability = {
 
 export const capabilities: Capability[] = [
   {
-    icon: "server",
-    title: "Backend Engineering",
-    description:
-      "APIs and business logic built to survive real traffic, real data, and real deadlines.",
-    bullets: ["REST API design & integration", "Python services", "Clean, tested, reviewable code"],
-  },
-  {
     icon: "boxes",
     title: "ERP & Odoo",
     description:
@@ -102,7 +95,23 @@ export const capabilities: Capability[] = [
     title: "Performance & Debugging",
     description:
       "Slow queries traced to their source and production incidents closed with a real root cause.",
-    bullets: ["ORM & SQL query tuning", "Log analysis on Linux", "Root-cause investigation"],
+    bullets: [
+      "ORM & SQL query tuning",
+      "Data handling & analysis",
+      "Log analysis on Linux",
+      "Root-cause investigation",
+    ],
+  },
+  {
+    icon: "server",
+    title: "Backend Engineering",
+    description:
+      "Business logic built to survive real traffic, real data, and real deadlines.",
+    bullets: [
+      "Strong logic & problem-solving",
+      "Python services",
+      "Clean, tested, reviewable code",
+    ],
   },
 ];
 
