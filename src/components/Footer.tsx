@@ -1,6 +1,6 @@
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
-import { site, socials, nav } from "@/lib/content";
+import { site, socials, nav, gmailCompose } from "@/lib/content";
 
 export function Footer() {
   const year = 2026; // build-time constant; bump as needed
@@ -29,8 +29,11 @@ export function Footer() {
 
         <div className="flex items-center gap-3">
           <a
-            href={`mailto:${site.email}`}
-            aria-label="Email"
+            href={gmailCompose}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={site.email}
+            aria-label={`Email ${site.email}`}
             className="text-faint transition-colors hover:text-fg"
           >
             <Mail className="h-5 w-5" />
