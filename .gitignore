@@ -15,7 +15,6 @@
 
 # next.js
 /.next/
-/out/
 
 # production
 /build
@@ -43,3 +42,6 @@ next-env.d.ts
 
 # Design tooling for the AI assistant — not part of the site
 .claude/
+# Build output — GitHub Actions builds and deploys this, it is not committed
+/out/
+/docs/

@@ -1,6 +1,9 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/content";
 
+// Emitted as a file at build time so it survives `output: "export"`.
+export const dynamic = "force-static";
+
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
