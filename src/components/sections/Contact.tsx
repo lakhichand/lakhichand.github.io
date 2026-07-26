@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/BrandIcons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { site, socials, messageSuggestions } from "@/lib/content";
+import { site, socials, messageSuggestions, gmailCompose } from "@/lib/content";
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -171,7 +171,10 @@ export function Contact() {
         <Reveal from="left">
           <div className="space-y-4">
             <a
-              href={`mailto:${site.email}`}
+              href={gmailCompose}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={site.email}
               className="card-surface flex items-center gap-4 rounded-2xl p-4 transition-colors hover:border-accent/40"
             >
               <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent/15 text-accent">
@@ -381,7 +384,10 @@ export function Contact() {
                 </button>
 
                 <a
-                  href={`mailto:${site.email}`}
+                  href={gmailCompose}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={site.email}
                   className="text-sm text-faint transition-colors hover:text-fg"
                 >
                   or email directly

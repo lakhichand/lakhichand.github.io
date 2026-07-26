@@ -23,7 +23,7 @@ export const site = {
   // Portrait shown in the About section. Drop the file in /public.
   // Leave as an empty string to fall back to the initials monogram.
   photo: "/profile.jpg",
-  availability: "Open to backend / full-stack roles",
+  availability: "Open to backend / full-stack / ERP engineering roles",
   // Typical turnaround shown on the contact card.
   responseTime: "Usually replies within a day",
 } as const;
@@ -45,6 +45,14 @@ export const heroStats: { value: string; label: string }[] = [
   { value: "500+", label: "DSA problems" },
   { value: "100+", label: "Bugs squashed" },
 ];
+
+/**
+ * Opens Gmail's compose window pre-addressed, instead of handing off to
+ * whatever desktop mail client the visitor may not have configured.
+ */
+export const gmailCompose = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+  site.email,
+)}&su=${encodeURIComponent(`Hello ${site.name.split(" ")[0]}`)}`;
 
 export const socials = {
   github: "https://github.com/lakhichand",
@@ -88,7 +96,7 @@ export const capabilities: Capability[] = [
     title: "ERP & Odoo",
     description:
       "Custom modules and version upgrades across SaaS, on-premise, and Odoo.sh environments.",
-    bullets: ["Custom module development", "One-on-one migrations", "Sales · Inventory · Accounting"],
+    bullets: ["Custom module development", "One-on-one migrations", "Sales · POS · Accounting · Project"],
   },
   {
     icon: "gauge",
@@ -109,7 +117,7 @@ export const capabilities: Capability[] = [
       "Business logic built to survive real traffic, real data, and real deadlines.",
     bullets: [
       "Strong logic & problem-solving",
-      "Python services",
+      "Python · PostgreSQL · JS components",
       "Clean, tested, reviewable code",
     ],
   },
@@ -168,8 +176,9 @@ export const experience: ExperienceItem[] = [
     kind: "work",
     points: [
       "Developed and customized enterprise Odoo applications for clients across multiple industries, building custom modules using Python, the Odoo ORM, PostgreSQL, XML, and JavaScript.",
-      "Customized standard Odoo reports and ensured module compatibility (Sales, Purchase, Inventory, CRM, Accounting, Manufacturing), including workflow automation, security configuration, and UI improvements.",
       "Managed multiple ERP environments (Odoo SaaS, On-Premise, Odoo.sh) and legacy systems; automated migration processes and provided end-to-end, one-on-one migration support through each customer's transition to the new version.",
+      "Debugged and resolved 100+ critical production bugs across Supply Chain, Accounting, and Project modules via structured root-cause analysis — directly improving system reliability and operating rhythm for enterprise customers.",
+      "Wrote customer-specific and reusable generic scripts to prepare client databases for upgrade, tailoring each one to the issues that database actually presented so migrations ran smoothly.",
       "Reviewed team members' upgrade code and merged it under dedicated contracts, ensuring customer databases remained stable throughout one-on-one migrations.",
       "Built internal Python helper utilities for recurring tasks, reducing time spent on repetitive failure patterns and surfacing process-improvement opportunities across the team.",
       "Delivered clean, maintainable, and efficient backend code across the full SDLC, collaborating within Agile teams and supporting version upgrades.",
@@ -184,6 +193,7 @@ export const experience: ExperienceItem[] = [
     points: [
       "Worked within the R&D team resolving tickets from Belgium HQ on Planning, Timesheet, and Project modules in a fast-paced, distributed Agile environment.",
       "Optimized SQL queries and Python backend logic via Odoo shell; used Linux tooling for log analysis, significantly reducing menu load times.",
+      "Customized standard Odoo reports and ensured module compatibility (Sales, Purchase, Inventory, CRM, Accounting, Manufacturing), including workflow automation, security configuration, and UI improvements.",
     ],
   },
   {
